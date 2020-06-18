@@ -1,4 +1,4 @@
-## SQL Server AlwaysOn wit containers
+## SQL Server AlwaysOn with containers
 
 This code uses two images of SQL Server docker to setup AlwaysOn Read-Scale/Clusterless AlwaysOn.
 
