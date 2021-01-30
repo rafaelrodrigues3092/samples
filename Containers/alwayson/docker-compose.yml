@@ -1,13 +1,22 @@
-version: "3.8"
+version: "3.9"
+
+x-service-environment: &common-variables
+    SA_PASSWORD: "MssqlPass123"
+    ACCEPT_EULA: "Y"
+    MSSQL_AGENT_ENABLED: "true"
+    MASTER_KEY_PASSWORD: "Pa$$w0rd!?*&123"
+    HADR_LOGIN_PASSWORD: "Pa$$w0rd123!?*&"
+    HADR_CERT_PASSWORD: "Pa$$w0rd1*&23!?"
+    HADR_PORT: 5022
+    INIT_WAIT: 30
+
 services:
+
     db1:
         build: ./sql
         environment:
-            SA_PASSWORD: "MssqlPass123"
-            ACCEPT_EULA: "Y"
-            MSSQL_AGENT_ENABLED: "true"
+            <<: *common-variables
             INIT_SCRIPT: "aoag_primary.sql"
-            INIT_WAIT: 30
         ports:
             - "2500:1433"
         container_name: db1
@@ -17,12 +26,13 @@ services:
             - mssql-server-backup:/var/opt/mssql/backup
         networks:
             - sqlaoag
+
     db2:
         build: ./sql
+        depends_on:
+            - "db1"
         environment:
-            SA_PASSWORD: "MssqlPass123"
-            ACCEPT_EULA: "Y"
-            MSSQL_AGENT_ENABLED: "true"
+            <<: *common-variables
             INIT_SCRIPT: "aoag_secondary.sql"
             INIT_WAIT: 50
         ports:
@@ -34,6 +44,8 @@ services:
             - mssql-server-backup:/var/opt/mssql/backup
         networks:
             - sqlaoag
+
+
 volumes:
     mssql-server-shared:
     mssql-server-backup:

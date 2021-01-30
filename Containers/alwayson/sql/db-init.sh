@@ -1,6 +1,7 @@
 #wait for the SQL Server to come up
 SLEEP_TIME=$INIT_WAIT
 SQL_SCRIPT=$INIT_SCRIPT
+
 echo "sleeping for ${SLEEP_TIME} seconds ..."
 sleep ${SLEEP_TIME}
 
@@ -16,6 +17,16 @@ then
 fi
 
 #use the SA password from the environment variable
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -d master -i $SQL_SCRIPT
+/opt/mssql-tools/bin/sqlcmd \
+    -S localhost \
+    -U sa \
+    -P $SA_PASSWORD \
+    -d master \
+    -i $SQL_SCRIPT #\
+    # -v \
+    # MASTER_KEY_PASSWORD=$MASTER_KEY_PASSWORD \
+    # HADR_LOGIN_PASSWORD=$HADR_LOGIN_PASSWORD \
+    # HADR_CERT_PASSWORD=$HADR_CERT_PASSWORD \
+    # HADR_PORT=$HADR_PORT
 
 echo "#######      AOAG script execution completed     #######"

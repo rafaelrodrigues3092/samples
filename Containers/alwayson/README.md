@@ -1,9 +1,9 @@
-## SQL Server AlwaysOn with containers
+# SQL Server AlwaysOn with containers
 
 This code uses two images of SQL Server docker to setup AlwaysOn Read-Scale/Clusterless AlwaysOn.
 
 
-### How to Use
+## How To
 
 1. Run the following command in this directory:
 
@@ -27,3 +27,13 @@ db2    | ##      AOAG script execution completed     ##
 ```
 docker-compose down
 ```
+
+## Connecting to SQL Server
+
+- Connect to the primary replica using SQL Server Management Studio (SSMS) using localhost,2500
+- Connect to the secondary replica using SQL Server Management Studio (SSMS) using localhost,2600
+
+## Failove
+
+- Only a forced failover works in this type of setup. To perform a failover, connect to the secondary (localhost,2600) and run the command
+ALTER AVAILABILITY GROUP AG1 FORCE_FAILOVER_ALLOW_DATA_LOSS;
