@@ -22,11 +22,6 @@ fi
     -U sa \
     -P $SA_PASSWORD \
     -d master \
-    -i $SQL_SCRIPT #\
-    # -v \
-    # MASTER_KEY_PASSWORD=$MASTER_KEY_PASSWORD \
-    # HADR_LOGIN_PASSWORD=$HADR_LOGIN_PASSWORD \
-    # HADR_CERT_PASSWORD=$HADR_CERT_PASSWORD \
-    # HADR_PORT=$HADR_PORT
+    -i $SQL_SCRIPT
 
 echo "#######      AOAG script execution completed     #######"

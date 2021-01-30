@@ -33,7 +33,13 @@ docker-compose down
 - Connect to the primary replica using SQL Server Management Studio (SSMS) using localhost,2500
 - Connect to the secondary replica using SQL Server Management Studio (SSMS) using localhost,2600
 
-## Failove
+## Failover
 
 - Only a forced failover works in this type of setup. To perform a failover, connect to the secondary (localhost,2600) and run the command
 ALTER AVAILABILITY GROUP AG1 FORCE_FAILOVER_ALLOW_DATA_LOSS;
+
+
+## Troubleshooting
+
+- If you get sa login errors, please adjust the INIT_WAIT values in the docker-compose.yml file.
+Sometimes, depending on the system, the container startup tasks may take longer and it the start sequence could potentially try to start setting you AlwaysOn before SQL Server is up and running.

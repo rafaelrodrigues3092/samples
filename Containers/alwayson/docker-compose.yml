@@ -8,7 +8,7 @@ x-service-environment: &common-variables
     HADR_LOGIN_PASSWORD: "Pa$$w0rd123!?*&"
     HADR_CERT_PASSWORD: "Pa$$w0rd1*&23!?"
     HADR_PORT: 5022
-    INIT_WAIT: 30
+    INIT_WAIT: 40
 
 services:
 
@@ -34,7 +34,7 @@ services:
         environment:
             <<: *common-variables
             INIT_SCRIPT: "aoag_secondary.sql"
-            INIT_WAIT: 50
+            INIT_WAIT: 60
         ports:
             - "2600:1433"
         container_name: db2
