@@ -1,0 +1,44 @@
+version: "3.9"
+
+x-service-environment: &common-variables
+    SA_PASSWORD: "MssqlPass123"
+    ACCEPT_EULA: "Y"
+    MSSQL_AGENT_ENABLED: "true"
+    MASTER_KEY_PASSWORD: "Pa$$w0rd!?*&123"
+    HADR_LOGIN_PASSWORD: "Pa$$w0rd123!?*&"
+    HADR_CERT_PASSWORD: "Pa$$w0rd1*&23!?"
+    HADR_PORT: 5022
+    INIT_WAIT: 40
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    build: .\pihole
+    #network_mode: "host"
+    ports:
+      - "80:80/tcp"
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "443:443/tcp"
+    environment:
+      <<: *common-variables
+      TZ: 'America/new_york'
+      WEBPASSWORD: '67268165'
+      PIHOLE_DNS_: 1.1.1.1;1.0.0.1
+      DNSSEC: 'false'
+      #ServerIP: '192.168.1.3'
+      ServerIP: '127.0.0.1'
+      VIRTUAL_HOST: pihole2
+      TEMPERATUREUNIT: F
+    restart: unless-stopped
+  api:
+    container_name: api
+    build: .\api
+    network_mode: "host"
+    # ports:
+    #   - "80:5000/tcp"
+    environment:
+      <<: *common-variables
+    restart: unless-stopped

@@ -1,0 +1,13 @@
+FROM python:3.8.6
+
+#copy all the files
+COPY . .
+
+ENV APP_SECRET_KEY='rafael12345'
+
+#Install the dependencies
+RUN apt-get -y update
+RUN pip3 install flask
+EXPOSE 5000
+
+CMD ["python", "./app.py"]
