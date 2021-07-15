@@ -42,4 +42,4 @@ ALTER AVAILABILITY GROUP AG1 FORCE_FAILOVER_ALLOW_DATA_LOSS;
 ## Troubleshooting
 
 - If you get sa login errors, please adjust the INIT_WAIT values in the docker-compose.yml file.
-Sometimes, depending on the system, the container startup tasks may take longer and it the start sequence could potentially try to start setting you AlwaysOn before SQL Server is up and running.
+Sometimes, depending on the system, the container startup tasks may take longer and the start sequence could potentially try to start setting you AlwaysOn before SQL Server is up and running.
