@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/rhel/server:2019-CU8-rhel-8
+FROM mcr.microsoft.com/mssql/rhel/server:2019-latest
 
 COPY . /
 USER root
